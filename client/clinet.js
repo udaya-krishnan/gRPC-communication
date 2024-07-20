@@ -4,13 +4,16 @@ const protoLoader = require('@grpc/proto-loader');
 const packageDefinition = protoLoader.loadSync('../service.proto', {});
 const anotherpackage=protoLoader.loadSync('../another_service.proto',{});
 const testpackage=protoLoader.loadSync("../test.proto",{})
+const userPackage=protoLoader.loadSync('../user.proto',{})
 const proto = grpc.loadPackageDefinition(packageDefinition).mypackage;
 const anotherproto=grpc.loadPackageDefinition(anotherpackage).mypackage;
 const testproto=grpc.loadPackageDefinition(testpackage).mypackage
+const userproto=grpc.loadPackageDefinition(userPackage).hello
 
 const client = new proto.MyService('localhost:50051', grpc.credentials.createInsecure());
 const another_client=new anotherproto.AnotherService("localhost:50052",grpc.credentials.createInsecure())
 const testclient=new testproto.newService("localhost:22233",grpc.credentials.createInsecure())
+const user=new userproto.UserService('localhost:12345',grpc.credentials.createInsecure())
 
 client.sayHello({ name: 'World' }, (error, response) => {
     if (!error) {
@@ -38,5 +41,12 @@ another_client.fetchData({query:'Hello'},(error,response)=>{
 testclient.hai({age:'20'},(error,response)=>{
     if(!error){
         console.log("testing....",response.place)
+    }
+})
+
+
+user.User({name:"udayan"},(error,response)=>{
+    if(!error){
+        console.log("user testingg....",response)
     }
 })

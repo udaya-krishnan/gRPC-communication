@@ -1,0 +1,19 @@
+syntax="proto3";
+
+package hello;
+
+service UserService{
+    rpc User (UserRequest) returns (UserReplay) {}
+}
+
+
+message UserRequest{
+    string name=1;
+   
+}
+
+
+message UserReplay{
+    int32 age=1;
+    string place=2;
+}
