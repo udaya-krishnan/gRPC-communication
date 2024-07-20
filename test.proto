@@ -1,0 +1,16 @@
+syntax="proto3";
+
+package mypackage;
+
+service newService {
+    rpc Hai (NewRequest) returns (NewReply) {}
+}
+
+
+message NewRequest{
+    string age=1;
+}
+
+message NewReply{
+    string place=1;
+}

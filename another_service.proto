@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package mypackage;
+
+service AnotherService {
+    rpc FetchData (DataRequest) returns (DataReply) {}
+}
+
+message DataRequest {
+    string query = 1;
+}
+
+message DataReply {
+    string data = 1;
+}
